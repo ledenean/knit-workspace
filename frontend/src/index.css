@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-shadow: hsl(var(--shadow));
+
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-hover: hsl(var(--sidebar-hover));
+  --color-sidebar-text-hover: hsl(var(--sidebar-text-hover));
+}
+
+@layer base {
+  :root {
+    --background: 33 27% 94%;
+    --foreground: 28 15% 20%;
+
+    --primary: 33 22% 68%;
+    --primary-foreground: 33 27% 94%;
+
+    --shadow: 31 10% 57%;
+
+    --sidebar: 29 13% 37%;
+    --sidebar-foreground: 33 27% 94%;
+    --sidebar-hover:33 27% 94%;
+    --sidebar-text-hover: 29 13% 27%;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body{
+    @apply bg-background;
+  }
+
+}
+#root {
+  max-width: 100%;
+  padding: 0;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
