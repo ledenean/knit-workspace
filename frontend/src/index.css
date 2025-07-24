@@ -14,6 +14,8 @@
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-hover: hsl(var(--sidebar-hover));
   --color-sidebar-text-hover: hsl(var(--sidebar-text-hover));
+
+  --color-input: hsl(var(--input));
 }
 
 @layer base {
@@ -30,6 +32,8 @@
     --sidebar-foreground: 33 27% 94%;
     --sidebar-hover:33 27% 94%;
     --sidebar-text-hover: 29 13% 27%;
+
+    --input: 0 0% 100%;
   }
 
   html {

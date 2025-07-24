@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
+
 const navItems = [
-    { name: "Dashboard", href: "#hero", current: true },
+    { name: "Dashboard", href: "#dashboard", current: true },
     { name: "Patterns", href: "#patterns", current: false },
     { name: "Projects", href: "#projects", current: false },
     { name: "Upcoming", href: "#upcoming", current: false }
 ];
-const Navbar = () => {
+
+export const Navbar = () => {
     return (
         // Side navigation bar, fixed to the left side of the screen
         <nav className="fixed top-0 left-0 z-50 h-screen w-64
@@ -36,4 +39,3 @@ const Navbar = () => {
         
     )
 };
-export default Navbar;
