@@ -8,19 +8,20 @@ import { useState, useEffect } from 'react';
 export function Patterns() {
     const [patterns, setPatterns] = useState([]);
     const [showAddForm, setShowAddForm] = useState(false);
-    useEffect(()=> {
-        async function loadAllPatterns(){
+
+    async function loadAllPatterns(){
             const data = await getAllPatterns();
             setPatterns(data);
 
         }
+    useEffect(()=> {
         loadAllPatterns();
     }, []);
 
     return (
         <>
             <Button onClick={() => setShowAddForm(true)}>+</Button>
-            {showAddForm && <AddPattern onClose={() => setShowAddForm(false)} />}
+            {showAddForm && <AddPattern onClose={() => setShowAddForm(false)} onPatternAdded={loadAllPatterns}/>}
             <div className='p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
                 {patterns.map((pattern)=> {
                     return (

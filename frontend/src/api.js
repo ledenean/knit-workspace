@@ -45,15 +45,22 @@ export async function getAllPatterns(){
 }
 export async function getPattern(id) {
     const response = await axios.get(`${URL}/patterns/${id}`);
+    const pattern = response.data;
+    const data = await getPdf(pattern.file);
+    pattern.fileUrl = data
     
-    const post = response.data;
-    return post;
+    return pattern;
 }
 
 export async function createPattern(pattern) {
-    const response = await axios.post(`${URL}/patterns`, pattern);
-    
-    return response;
+    const data = await createPdf(pattern.fileUrl);
+    const newPatternData = {
+        patternTitle: pattern.patternTitle,
+        patternDesigner: pattern.patternDesigner,
+        pdfKey: data.key
+    };
+    const response = await axios.post(`${URL}/patterns`, newPatternData);
+    return response.data;
 }
 
 export async function updatePattern(id, pattern) {
@@ -65,5 +72,21 @@ export async function updatePattern(id, pattern) {
 export async function deletePattern(id) {
     const response = await axios.delete(`${URL}/patterns/${id}`);
     
+    return response;
+}
+
+export async function createPdf(file){
+    const formData = new FormData();
+    formData.append('pdf', file)
+    const response = await axios.post(`${URL}/pdfs`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+    return response.data;
+}
+
+export async function getPdf(id){
+    const response = await axios.get(`${URL}/pdfs/${id}`);
     return response;
 }

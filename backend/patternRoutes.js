@@ -31,11 +31,10 @@ patternRoutes.route("/:id").get(async (request, response) => {
 // Create pattern
 patternRoutes.route("/").post(async (request, response) => {
     let db = database.getDb();
-    console.log(request.body);
     let mongoObject = {
-        title: request.body.title,
-        notes: request.body.notes,
-        dateStarted: request.body.dateStarted
+        patternTitle: request.body.patternTitle,
+        patternDesigner: request.body.patternDesigner,
+        fileURL: request.body.pdfKey
     };
     let data = await db.collection("patterns").insertOne(mongoObject);
     response.json(data);

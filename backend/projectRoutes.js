@@ -34,7 +34,8 @@ projectRoutes.route("/projects").post(async (request, response) => {
     let mongoObject = {
         title: request.body.title,
         notes: request.body.notes,
-        dateStarted: request.body.dateStarted
+        dateStarted: request.body.dateStarted,
+        imageId: request.body.imageId
     };
     let data = await db.collection("projects").insertOne(mongoObject);
     response.json(data);

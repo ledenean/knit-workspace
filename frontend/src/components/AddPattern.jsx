@@ -3,7 +3,7 @@ import { createPattern } from '../api'
 import { Button } from './ui/button'
 import downloadImage from '../assets/download.svg'
 
-export function AddPattern({ onClose }) {
+export function AddPattern({ onClose, onPatternAdded }) {
     const [title, setTitle] = useState("");
     const [designer, setDesigner] = useState("");
     const [file, setFile] = useState();
@@ -17,16 +17,18 @@ export function AddPattern({ onClose }) {
         let submitObject = {
             patternTitle: title,
             patternDesigner: designer,
-            pdfFile: file
+            fileUrl: file
         }
 
         await createPattern(submitObject);
+        onPatternAdded();
         onClose();
     }
     
     function handleFileUpload(e){
         const file = e.target.files[0];
         const fileExtension = file.name.substring(file.name.lastIndexOf("."));
+
         if (fileExtension != ".pdf") {
             alert ("File must be a pdf");
             inputFile.current.value = "";
@@ -36,7 +38,7 @@ export function AddPattern({ onClose }) {
         if (file.size > MAX_FILE_SIZE) {
             alert ("File size exceeds the limit (15MB)");
             inputFile.current.value = "";
-            inputFile.current.type = file;
+            inputFile.current.type = "file";
             return
         }
 
@@ -85,6 +87,7 @@ export function AddPattern({ onClose }) {
                         <p className="text-foreground/70 ">or</p>
                         <Button type="button" onClick={handleCustomButtonClick} >Browse Files</Button>
                         <input type="file" className="hidden" onChange={handleFileUpload} ref={inputFile} onClick={(e)=> e.target.value = null} />
+                        {file && <p className="text-sm text-foreground/70">Selected File: {file.name}</p>}
                         {/* <input className="mt-1 block w-full border rounded-xl bg-input p-10
                         file:rounded-full "
 
